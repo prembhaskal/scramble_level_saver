@@ -1,22 +1,38 @@
 {
   "level": 1,
   "spellathon": {
-    "sixLetters": "appled",
-    "centerLetter": "e"
+    "sixLetters": "LVITAL",
+    "centerLetter": "Y"
   },
   "scramble": {
     "words": [
-      "adsds",
-      "dsd",
-      "sds",
-      "dsd"
+      "GLAEE",
+      "HTORT",
+      "SUYLMM",
+      "MRTHHY"
     ],
     "circledLetters": [
-      [],
-      [],
-      [],
-      []
+      [
+        0,
+        1,
+        4
+      ],
+      [
+        0,
+        1,
+        2
+      ],
+      [
+        1,
+        3,
+        4
+      ],
+      [
+        1,
+        2,
+        4
+      ]
     ],
-    "sentence": "dsdsd"
+    "sentence": "Happiness is good <BLANK > and a bad <BLANK> - Ingrid Bergman (6,6)"
   }
 }
