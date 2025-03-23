@@ -74,7 +74,6 @@ export default function CreateLevel() {
           setFormData({ ...formData, spellathon: spellathonData })
         }
       />
-
       <ScrambleSection
         data={formData.scramble}
         onChange={(scrambleData) =>
