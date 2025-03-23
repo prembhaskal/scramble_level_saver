@@ -1,0 +1,22 @@
+{
+  "level": 1,
+  "spellathon": {
+    "sixLetters": "wewewe",
+    "centerLetter": "e"
+  },
+  "scramble": {
+    "words": [
+      "ewewewe",
+      "fsdsd",
+      "dsewer",
+      "rdfdfd"
+    ],
+    "circledLetters": [
+      [],
+      [],
+      [],
+      []
+    ],
+    "sentence": "dfsdsdf"
+  }
+}
