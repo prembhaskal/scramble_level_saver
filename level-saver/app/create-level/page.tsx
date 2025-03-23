@@ -58,14 +58,22 @@ export default function CreateLevel() {
           ...formData,
         }),
       });
-
-      if (response.ok) {
-        router.push('/');
+  
+      if (!response.ok) {
+        throw new Error('Failed to save level');
       }
+  
+      // Add a success message
+      alert('Level saved successfully!');
+      
+      // Redirect to home page
+      router.push('/');
     } catch (error) {
       console.error('Error saving level:', error);
+      alert('Failed to save level');
     }
   };
+  
 
   return (
     <div className="container mx-auto p-4">
