@@ -5,8 +5,9 @@ export async function GET(
   request: Request,
   { params }: { params: { levelId: string } }
 ) {
+  const levelId = await params.levelId;
   try {
-    const level = await getLevel(parseInt(params.levelId));
+    const level = await getLevel(parseInt(levelId));
     if (!level) {
       return NextResponse.json(
         { error: 'Level not found' },
