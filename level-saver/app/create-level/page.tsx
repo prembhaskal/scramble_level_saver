@@ -4,18 +4,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import SpellathonSection from '../components/spellathonsection';
 import ScrambleSection from '../components/scramblesection';
-
-interface FormData {
-  spellathon: {
-    sixLetters: string;
-    centerLetter: string;
-  };
-  scramble: {
-    words: string[];
-    circledLetters: number[][];
-    sentence: string;
-  };
-}
+import { FormData } from '../types/level';
 
 export default function CreateLevel() {
   const router = useRouter();

@@ -63,3 +63,45 @@ function validateLevel(level: any) {
   
   return true;
 }
+
+export async function getLevel(levelId: number) {
+  await ensureLevelsDirectory();
+  
+  try {
+    const content = await fs.readFile(
+      path.join(LEVELS_DIR, `level_${levelId}.json`),
+      'utf-8'
+    );
+    return JSON.parse(content);
+  } catch (error) {
+    return null;
+  }
+}
+
+export async function updateLevel(levelId: number, levelData: any) {
+  await ensureLevelsDirectory();
+  
+  if (!validateLevel(levelData)) {
+    throw new Error('Invalid level data');
+  }
+
+  const filename = `level_${levelId}.json`;
+  await fs.writeFile(
+    path.join(LEVELS_DIR, filename),
+    JSON.stringify(levelData, null, 2),
+    'utf-8'
+  );
+
+  return levelData;
+}
+
+export async function deleteLevel(levelId: number) {
+  await ensureLevelsDirectory();
+  
+  try {
+    await fs.unlink(path.join(LEVELS_DIR, `level_${levelId}.json`));
+    return true;
+  } catch (error) {
+    throw new Error('Failed to delete level');
+  }
+}

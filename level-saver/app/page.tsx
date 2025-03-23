@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 interface Level {
   level: number;
@@ -18,6 +19,8 @@ interface Level {
 
 export default function Home() {
   const [levels, setLevels] = useState<Level[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const router = useRouter();
 
   useEffect(() => {
     fetchLevels();
@@ -25,6 +28,7 @@ export default function Home() {
 
   const fetchLevels = async () => {
     try {
+      setIsLoading(true);
       const response = await fetch('/api/levels');
       if (!response.ok) {
         throw new Error('Failed to fetch levels');
@@ -33,8 +37,41 @@ export default function Home() {
       setLevels(data);
     } catch (error) {
       console.error('Error fetching levels:', error);
+    } finally {
+      setIsLoading(false);
     }
   };
+
+  const handleDelete = async (levelNumber: number) => {
+    if (!confirm('Are you sure you want to delete this level?')) {
+      return;
+    }
+
+    try {
+      const response = await fetch(`/api/levels/${levelNumber}`, {
+        method: 'DELETE',
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to delete level');
+      }
+
+      // Refresh the levels list
+      fetchLevels();
+      alert('Level deleted successfully!');
+    } catch (error) {
+      console.error('Error deleting level:', error);
+      alert('Failed to delete level');
+    }
+  };
+
+  if (isLoading) {
+    return (
+      <div className="container mx-auto p-4 flex justify-center items-center min-h-screen">
+        <div className="text-gray-500">Loading...</div>
+      </div>
+    );
+  }
 
   return (
     <div className="container mx-auto p-4">
@@ -57,7 +94,23 @@ export default function Home() {
               key={level.level} 
               className="border rounded-lg p-4 shadow hover:shadow-md transition-shadow"
             >
-              <h2 className="text-xl font-bold mb-3">Level {level.level}</h2>
+              <div className="flex justify-between items-start mb-3">
+                <h2 className="text-xl font-bold">Level {level.level}</h2>
+                <div className="space-x-2">
+                  <button
+                    onClick={() => router.push(`/edit-level/${level.level}`)}
+                    className="text-blue-500 hover:text-blue-700"
+                  >
+                    Edit
+                  </button>
+                  <button
+                    onClick={() => handleDelete(level.level)}
+                    className="text-red-500 hover:text-red-700"
+                  >
+                    Delete
+                  </button>
+                </div>
+              </div>
               
               <div className="mb-4">
                 <h3 className="font-semibold mb-2">Spellathon</h3>

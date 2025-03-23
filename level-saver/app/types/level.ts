@@ -15,3 +15,7 @@ export interface Spellathon {
     scramble: Scramble;
   }
   
+  export interface FormData {
+    spellathon: Spellathon;
+    scramble: Scramble;
+  }
