@@ -1,10 +1,8 @@
 import { NextResponse } from 'next/server';
 import { getLevel, updateLevel, deleteLevel } from '@/app/lib/fileUtils';
 
-export async function GET(
-  request: Request,
-  { params }: { params: { levelId: string } }
-) {
+export async function GET(request: Request, props: { params: Promise<{ levelId: string }> }) {
+  const params = await props.params;
   const levelId = await params.levelId;
   try {
     const level = await getLevel(parseInt(levelId));
@@ -23,10 +21,8 @@ export async function GET(
   }
 }
 
-export async function PUT(
-  request: Request,
-  { params }: { params: { levelId: string } }
-) {
+export async function PUT(request: Request, props: { params: Promise<{ levelId: string }> }) {
+  const params = await props.params;
   try {
     const body = await request.json();
     const updatedLevel = await updateLevel(parseInt(params.levelId), body);
@@ -39,10 +35,8 @@ export async function PUT(
   }
 }
 
-export async function DELETE(
-  request: Request,
-  { params }: { params: { levelId: string } }
-) {
+export async function DELETE(request: Request, props: { params: Promise<{ levelId: string }> }) {
+  const params = await props.params;
   try {
     await deleteLevel(parseInt(params.levelId));
     return NextResponse.json({ success: true });

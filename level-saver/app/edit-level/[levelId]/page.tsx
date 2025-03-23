@@ -1,18 +1,19 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, use } from 'react';
 import { useRouter } from 'next/navigation';
 import SpellathonSection from '../../components/spellathonsection';
 import ScrambleSection from '../../components/scramblesection';
 import {FormData} from '../../types/level';
 
 interface Props {
-  params: {
+  params: Promise<{
     levelId: string;
-  };
+  }>;
 }
 
-export default function EditLevel({ params }: Props) {
+export default function EditLevel(props: Props) {
+  const params = use(props.params);
   const router = useRouter();
   const levelId = parseInt(params.levelId);
   const [isLoading, setIsLoading] = useState(true);
