@@ -1,6 +1,17 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
+### Installation
+- pre-requisites
+  - Have latest node installed.
+
+```bash
+npm config set registry https://registry.npmjs.org/
+npm config get reigstry
+
+npm install next@latest react@latest react-dom@latest
+
+```
 
 First, run the development server:
 
