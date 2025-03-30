@@ -1,0 +1,26 @@
+{
+  "level": 2,
+  "spellathon": {
+    "sixLetters": "DSDSDS",
+    "centerLetter": "D",
+    "description": "SDSDSD"
+  },
+  "scramble": {
+    "words": [
+      "",
+      "",
+      "",
+      ""
+    ],
+    "circledLetters": [
+      [],
+      [],
+      [],
+      []
+    ],
+    "sentence": ""
+  },
+  "answers": {
+    "ans": ""
+  }
+}

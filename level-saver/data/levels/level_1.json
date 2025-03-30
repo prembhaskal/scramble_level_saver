@@ -2,7 +2,8 @@
   "level": 1,
   "spellathon": {
     "sixLetters": "LVITAL",
-    "centerLetter": "Y"
+    "centerLetter": "Y",
+    "description": "2- GOOD 3-EXCELLENT"
   },
   "scramble": {
     "words": [
@@ -34,5 +35,8 @@
       ]
     ],
     "sentence": "Happiness is good <BLANK > and a bad <BLANK> - Ingrid Bergman (6,6)"
+  },
+  "answers": {
+    "ans": "dsdsdsdsd"
   }
 }

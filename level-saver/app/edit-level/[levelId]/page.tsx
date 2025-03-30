@@ -4,7 +4,8 @@ import { useEffect, useState, use } from 'react';
 import { useRouter } from 'next/navigation';
 import SpellathonSection from '../../components/spellathonsection';
 import ScrambleSection from '../../components/scramblesection';
-import {FormData} from '../../types/level';
+import AnswersSection from '../../components/answerssection';
+import {FormData} from '../../page';
 
 interface Props {
   params: Promise<{
@@ -21,12 +22,16 @@ export default function EditLevel(props: Props) {
     spellathon: {
       sixLetters: '',
       centerLetter: '',
+      description: '',
     },
     scramble: {
       words: ['', '', '', ''],
       circledLetters: [[], [], [], []],
       sentence: '',
     },
+    answers: {
+      ans: '',
+    }
   });
 
   useEffect(() => {
@@ -107,6 +112,13 @@ export default function EditLevel(props: Props) {
         data={formData.scramble}
         onChange={(scrambleData) =>
           setFormData({ ...formData, scramble: scrambleData })
+        }
+      />
+
+      <AnswersSection
+        data={formData.answers}
+        onChange={(answersData) => 
+          setFormData({ ...formData, answers: answersData})
         }
       />
 

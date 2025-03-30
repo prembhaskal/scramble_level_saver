@@ -4,18 +4,50 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
-interface Level {
-  level: number;
-  spellathon: {
-    sixLetters: string;
-    centerLetter: string;
-  };
-  scramble: {
-    words: string[];
-    circledLetters: number[][];
-    sentence: string;
-  };
+// interface Level {
+//   level: number;
+//   spellathon: {
+//     description: string;
+//     sixLetters: string;
+//     centerLetter: string;
+//   };
+//   scramble: {
+//     words: string[];
+//     circledLetters: number[][];
+//     sentence: string;
+//   };
+//   answers: string;
+// }
+
+export interface Spellathon {
+  sixLetters: string;
+  centerLetter: string;
+  description: string;
 }
+
+export interface Scramble {
+  words: string[];
+  circledLetters: number[][];
+  sentence: string;
+}
+
+export interface Answers {
+  ans: string;
+}
+
+export interface Level {
+  level: number;
+  spellathon: Spellathon;
+  scramble: Scramble;
+  answers: string;
+}
+
+export interface FormData {
+  spellathon: Spellathon;
+  scramble: Scramble;
+  answers: Answers;
+}
+
 
 export default function Home() {
   const [levels, setLevels] = useState<Level[]>([]);

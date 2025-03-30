@@ -4,7 +4,8 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import SpellathonSection from '../components/spellathonsection';
 import ScrambleSection from '../components/scramblesection';
-import { FormData } from '../types/level';
+import { FormData } from '../page';
+import AnswersSection from '../components/answerssection';
 
 export default function CreateLevel() {
   const router = useRouter();
@@ -13,11 +14,15 @@ export default function CreateLevel() {
     spellathon: {
       sixLetters: '',
       centerLetter: '',
+      description: '',
     },
     scramble: {
       words: ['', '', '', ''],
       circledLetters: [[], [], [], []],
       sentence: '',
+    },
+    answers: {
+      ans: '',
     },
   });
 
@@ -78,6 +83,13 @@ export default function CreateLevel() {
         data={formData.scramble}
         onChange={(scrambleData) =>
           setFormData({ ...formData, scramble: scrambleData })
+        }
+      />
+
+      <AnswersSection
+        data={formData.answers}
+        onChange={(answersData) => 
+          setFormData({ ...formData, answers: answersData})
         }
       />
 
