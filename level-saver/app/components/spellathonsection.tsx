@@ -14,14 +14,6 @@ interface SpellathonProps {
       <div className="mb-8">
         <h2 className="text-xl mb-4">Spellathon</h2>
         <div className="grid gap-4">
-        {/* <input
-            type="description"
-            maxLength={100}
-            placeholder="Description"
-            value={data.description.toUpperCase()}
-            onChange={(e) => onChange({ ...data, description: e.target.value.toUpperCase() })}
-            className="border p-2 rounded w-30"
-          /> */}
           <textarea
             value={data.description}
             onChange={(e) => onChange({ ...data, description: e.target.value.toUpperCase() })}
