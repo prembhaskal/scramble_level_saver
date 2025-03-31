@@ -15,7 +15,7 @@ export async function GET(request: Request, props: { params: Promise<{ levelId: 
     return NextResponse.json(level);
   } catch (error) {
     return NextResponse.json(
-      { error: 'Failed to fetch level' },
+      { error: 'Failed to fetch level ' + error },
       { status: 500 }
     );
   }
@@ -29,7 +29,7 @@ export async function PUT(request: Request, props: { params: Promise<{ levelId: 
     return NextResponse.json(updatedLevel);
   } catch (error) {
     return NextResponse.json(
-      { error: 'Failed to update level' },
+      { error: 'Failed to update level ' + error },
       { status: 500 }
     );
   }
@@ -42,7 +42,7 @@ export async function DELETE(request: Request, props: { params: Promise<{ levelI
     return NextResponse.json({ success: true });
   } catch (error) {
     return NextResponse.json(
-      { error: 'Failed to delete level' },
+      { error: 'Failed to delete level ' + error },
       { status: 500 }
     );
   }

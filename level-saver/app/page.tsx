@@ -4,21 +4,6 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
-// interface Level {
-//   level: number;
-//   spellathon: {
-//     description: string;
-//     sixLetters: string;
-//     centerLetter: string;
-//   };
-//   scramble: {
-//     words: string[];
-//     circledLetters: number[][];
-//     sentence: string;
-//   };
-//   answers: string;
-// }
-
 export interface Spellathon {
   sixLetters: string;
   centerLetter: string;

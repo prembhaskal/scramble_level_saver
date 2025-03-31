@@ -1,5 +1,6 @@
 import fs from 'fs/promises';
 import path from 'path';
+import {Level} from '../types/level';
 
 const LEVELS_DIR = path.join(process.cwd(), 'data', 'levels');
 
@@ -34,7 +35,7 @@ export async function getLastLevel() {
   return Math.max(...levels.map(level => level.level));
 }
 
-export async function saveLevel(levelData: any) {
+export async function saveLevel(levelData: Level) {
   await ensureLevelsDirectory();
   
   // Validate level data
@@ -52,7 +53,7 @@ export async function saveLevel(levelData: any) {
   return levelData;
 }
 
-function validateLevel(level: any) {
+function validateLevel(level: Level) {
   // Add validation logic here
   if (!level.level) return false;
   if (!level.spellathon?.sixLetters || level.spellathon.sixLetters.length !== 6) return false;
@@ -74,11 +75,12 @@ export async function getLevel(levelId: number) {
     );
     return JSON.parse(content);
   } catch (error) {
+    console.error("error in getLevel ", error);
     return null;
   }
 }
 
-export async function updateLevel(levelId: number, levelData: any) {
+export async function updateLevel(levelId: number, levelData: Level) {
   await ensureLevelsDirectory();
   
   if (!validateLevel(levelData)) {
@@ -102,6 +104,6 @@ export async function deleteLevel(levelId: number) {
     await fs.unlink(path.join(LEVELS_DIR, `level_${levelId}.json`));
     return true;
   } catch (error) {
-    throw new Error('Failed to delete level');
+    throw new Error(`Failed to delete level ${error}`);
   }
 }
