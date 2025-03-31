@@ -1,26 +1,42 @@
 {
   "level": 2,
   "spellathon": {
-    "sixLetters": "DSDSDS",
-    "centerLetter": "D",
-    "description": "SDSDSD"
+    "sixLetters": "TTHARE",
+    "centerLetter": "C",
+    "description": "18-AVERAGE | 21-GOOD | 23-OUTSTANDING"
   },
   "scramble": {
     "words": [
-      "",
-      "",
-      "",
-      ""
+      "ANAER",
+      "DTIIO",
+      "EGHLNT",
+      "PERISH"
     ],
     "circledLetters": [
-      [],
-      [],
-      [],
-      []
+      [
+        0,
+        1,
+        2
+      ],
+      [
+        0,
+        2,
+        3
+      ],
+      [
+        0,
+        2,
+        4
+      ],
+      [
+        2,
+        3,
+        5
+      ]
     ],
-    "sentence": ""
+    "sentence": "Falling in love and having a  <SPACE> are two different things - Keanu Reeves (12)"
   },
   "answers": {
-    "ans": ""
+    "ans": "SCRAMBLE:\nwords: Arena, idiot, length, reship\nAnswer: relationship\n\nSPELLATHON:\nache, acre, arch, care, cart, cater, char,\nchart, chat, CHATTER, cheat, crate,\neach, etch, race, RATCHET, reach,\nreact, retch, tact, teach, trace, tract"
   }
 }
