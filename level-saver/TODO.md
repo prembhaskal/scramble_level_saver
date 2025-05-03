@@ -6,6 +6,8 @@
     - fix a file structure in drive 
     - update options to read, add, update and delete
     - remove file save feature as it doesn't work on webserver like vercel.
+    - move sign-in to google to home page. validate before going to next step
+    - ensure whole thing works even when deployed to vercel, save secrets in vercel environments.
 
 ## Done
 - add option to save answers, they can be just plaintext.
