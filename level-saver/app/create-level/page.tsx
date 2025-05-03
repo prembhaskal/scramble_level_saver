@@ -6,6 +6,7 @@ import SpellathonSection from '../components/spellathonsection';
 import ScrambleSection from '../components/scramblesection';
 import { FormData } from '../page';
 import AnswersSection from '../components/answerssection';
+import GoogleDriveSave from '../components/GoogleDriveSave';
 
 export default function CreateLevel() {
   const router = useRouter();
@@ -99,6 +100,10 @@ export default function CreateLevel() {
       >
         Save Level
       </button>
+      <GoogleDriveSave
+        levelData={formData}
+        fileName={`level_${currentLevel}.json`}
+      />
     </div>
   );
 }
