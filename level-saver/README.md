@@ -50,6 +50,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 
 Deployed here https://vercel.com/prembhaskals-projects/scramble-level-saver 
+  login with github.
 
 
 ## Open deployed project

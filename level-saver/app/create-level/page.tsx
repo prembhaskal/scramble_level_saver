@@ -2,14 +2,15 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useSession, signIn } from 'next-auth/react';
 import SpellathonSection from '../components/spellathonsection';
 import ScrambleSection from '../components/scramblesection';
 import { FormData } from '../page';
 import AnswersSection from '../components/answerssection';
-import GoogleDriveSave from '../components/GoogleDriveSave';
 
 export default function CreateLevel() {
   const router = useRouter();
+  const { data: session } = useSession();
   const [currentLevel, setCurrentLevel] = useState(1);
   const [formData, setFormData] = useState<FormData>({
     spellathon: {
@@ -42,6 +43,20 @@ export default function CreateLevel() {
   };
 
   const handleSubmit = async () => {
+    if (!session) {
+      // If not authenticated, prompt to sign in
+      const result = await signIn('google', { 
+        callbackUrl: window.location.href,
+        redirect: false 
+      });
+      
+      if (result?.error) {
+        alert('Please sign in to save levels');
+        return;
+      }
+      return;
+    }
+
     try {
       const response = await fetch('/api/save-level', {
         method: 'POST',
@@ -68,7 +83,6 @@ export default function CreateLevel() {
       alert('Failed to save level');
     }
   };
-  
 
   return (
     <div className="container mx-auto p-4">
@@ -98,12 +112,8 @@ export default function CreateLevel() {
         onClick={handleSubmit}
         className="bg-green-500 text-white px-4 py-2 rounded mt-4"
       >
-        Save Level
+        {session ? 'Save Level' : 'Sign in to Save Level'}
       </button>
-      <GoogleDriveSave
-        levelData={formData}
-        fileName={`level_${currentLevel}.json`}
-      />
     </div>
   );
 }

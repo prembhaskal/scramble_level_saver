@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { useSession, signIn, signOut } from 'next-auth/react';
 
 export interface Spellathon {
   sixLetters: string;
@@ -33,11 +34,11 @@ export interface FormData {
   answers: Answers;
 }
 
-
 export default function Home() {
   const [levels, setLevels] = useState<Level[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
+  const { data: session } = useSession();
 
   useEffect(() => {
     fetchLevels();
@@ -94,12 +95,34 @@ export default function Home() {
     <div className="container mx-auto p-4">
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-bold">Game Levels</h1>
-        <Link 
-          href="/create-level" 
-          className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-        >
-          Create New Level
-        </Link>
+        <div className="flex items-center gap-4">
+          <Link 
+            href="/create-level" 
+            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+          >
+            Create New Level
+          </Link>
+          {session ? (
+            <div className="flex items-center gap-2">
+              <span className="text-sm text-gray-600">
+                {session.user?.email}
+              </span>
+              <button
+                onClick={() => signOut()}
+                className="text-sm text-gray-600 hover:text-gray-800"
+              >
+                Sign Out
+              </button>
+            </div>
+          ) : (
+            <button
+              onClick={() => signIn('google')}
+              className="text-sm text-gray-600 hover:text-gray-800"
+            >
+              Sign in with Google (for Drive backup)
+            </button>
+          )}
+        </div>
       </div>
 
       {levels.length === 0 ? (
