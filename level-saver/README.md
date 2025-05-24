@@ -8,6 +8,7 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 ```bash
 npm config set registry https://registry.npmjs.org/
 npm config get reigstry
+# if vercel deployment, you need to set the registry to the npmjs.org, ensure it is not set to office registry. if it was, delete node_modules and package-lock.json and run npm install again.
 
 npm install next@latest react@latest react-dom@latest
 
