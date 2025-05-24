@@ -1,6 +1,6 @@
 // app/api/levels/route.ts
 import { NextResponse } from 'next/server';
-import { getAllLevels } from '../../lib/fileUtils';
+import { getAllLevels } from '../../lib/levelStorage';
 
 export async function GET() {
   try {
