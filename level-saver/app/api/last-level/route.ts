@@ -1,6 +1,6 @@
 // app/api/last-level/route.ts
 import { NextResponse } from 'next/server';
-import { getLastLevel } from '../../lib/fileUtils';
+import { getLastLevel } from '../../lib/levelStorage';
 
 export async function GET() {
   try {
