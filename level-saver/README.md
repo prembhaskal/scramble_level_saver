@@ -53,6 +53,10 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 Deployed here https://vercel.com/prembhaskals-projects/scramble-level-saver 
   login with github.
 
+## Google Drive Backup
+- check client id/secret in google cloud console
+  - https://console.cloud.google.com/auth/clients/616027423877-n3djbmackb1175jvrd4cmjeco899vnat.apps.googleusercontent.com?inv=1&invt=AbyWIg&project=scramble-level-saver-34027 
+  - put it in env variables in vercel.
 
 ## Open deployed project
 https://scramble-level-saver.vercel.app/ 
