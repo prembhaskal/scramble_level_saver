@@ -1,0 +1,26 @@
+{
+  "level": 4,
+  "spellathon": {
+    "sixLetters": "ORANGE",
+    "centerLetter": "L",
+    "description": "NEW LEVEL"
+  },
+  "scramble": {
+    "words": [
+      "MANGAO",
+      "RAMBO",
+      "PAKSHI",
+      "PATLA"
+    ],
+    "circledLetters": [
+      [],
+      [],
+      [],
+      []
+    ],
+    "sentence": "kobmdi"
+  },
+  "answers": {
+    "ans": "answere"
+  }
+}

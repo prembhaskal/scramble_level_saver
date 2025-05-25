@@ -2,7 +2,7 @@
 import { NextResponse } from 'next/server';
 import { saveLevel } from '../../lib/fileUtils';
 import { getServerSession } from 'next-auth';
-import { authOptions } from '../auth/[...nextauth]/route';
+import { authOptions } from '@/app/api/auth/[...nextauth]/auth.config';
 import { google } from 'googleapis';
 
 export async function POST(request: Request) {
