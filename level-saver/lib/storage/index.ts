@@ -1,5 +1,6 @@
 import { StorageService } from './types';
 import { LocalFileSystemStorage } from './local-storage';
+import { VercelBlobStorage } from './vercel-blob-storage';
 
 export function getStorageService(): StorageService {
   const storageType = process.env.STORAGE_TYPE || 'local';
@@ -8,8 +9,7 @@ export function getStorageService(): StorageService {
     case 'local':
       return new LocalFileSystemStorage();
     case 'vercel-blob':
-      // TODO: Implement Vercel Blob storage
-      throw new Error('Vercel Blob storage not implemented yet');
+      return new VercelBlobStorage('levels');
     default:
       throw new Error(`Unknown storage type: ${storageType}`);
   }
