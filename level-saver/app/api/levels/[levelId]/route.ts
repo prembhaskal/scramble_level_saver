@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { getLevel, updateLevel, deleteLevel } from '@/app/lib/fileUtils';
+import { getLevel, updateLevel, deleteLevel } from '@/app/lib/levelStorage';
 
 export async function GET(request: Request, props: { params: Promise<{ levelId: string }> }) {
   const params = await props.params;
