@@ -1,5 +1,6 @@
 import fs from 'fs/promises';
 import path from 'path';
+import { Level } from '../../app/types/level';
 import { StorageService } from './types';
 
 export class LocalFileSystemStorage implements StorageService {
@@ -13,7 +14,7 @@ export class LocalFileSystemStorage implements StorageService {
     return path.join(process.cwd(), this.baseDir, filePath);
   }
 
-  async save(data: any, filePath: string): Promise<string> {
+  async save(data: Level, filePath: string): Promise<string> {
     const fullPath = this.getFullPath(filePath);
     
     // Ensure the directory exists
@@ -25,10 +26,22 @@ export class LocalFileSystemStorage implements StorageService {
     return filePath;
   }
 
-  async read(filePath: string): Promise<any> {
+  async read(filePath: string): Promise<Level> {
     const fullPath = this.getFullPath(filePath);
     const content = await fs.readFile(fullPath, 'utf-8');
     return JSON.parse(content);
+  }
+
+  async listFiles(directoryPath: string): Promise<string[]> {
+    const fullPath = this.getFullPath(directoryPath);
+    try {
+      const files = await fs.readdir(fullPath);
+      return files.filter(file => file.endsWith('.json'));
+    } catch (error) {
+      console.error(`Error listing files in ${directoryPath}:`, error);
+      // If directory doesn't exist, return empty array
+      return [];
+    }
   }
 
   async delete(filePath: string): Promise<void> {

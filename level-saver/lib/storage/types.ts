@@ -1,3 +1,5 @@
+import { Level } from '../../app/types/level';
+
 export interface StorageService {
   /**
    * Save data to storage
@@ -5,14 +7,21 @@ export interface StorageService {
    * @param path The path where to save the data
    * @returns The URL or path where the data was saved
    */
-  save(data: any, path: string): Promise<string>;
+  save(data: Level, path: string): Promise<string>;
 
   /**
    * Read data from storage
    * @param path The path to read from
    * @returns The data read from storage
    */
-  read(path: string): Promise<any>;
+  read(path: string): Promise<Level>;
+
+  /**
+   * List all files in a directory
+   * @param directoryPath The directory path to list files from
+   * @returns Array of file paths in the directory
+   */
+  listFiles(directoryPath: string): Promise<string[]>;
 
   /**
    * Delete data from storage

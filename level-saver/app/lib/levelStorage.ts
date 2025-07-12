@@ -6,9 +6,21 @@ const LEVELS_DIR = 'levels';
 export async function getAllLevels(): Promise<Level[]> {
   const storage = getStorageService();
   try {
-    // For Vercel Blob, we need to list all files in the directory
-    const files = await storage.read(LEVELS_DIR);
-    return files.sort((a: Level, b: Level) => a.level - b.level);
+    // Get list of all level files
+    const filenames = await storage.listFiles(LEVELS_DIR);
+    
+    // Read each level file
+    const levels: Level[] = [];
+    for (const filename of filenames) {
+      try {
+        const level = await storage.read(`${LEVELS_DIR}/${filename}`);
+        levels.push(level);
+      } catch (error) {
+        console.error(`Error reading level file ${filename}:`, error);
+      }
+    }
+    
+    return levels.sort((a: Level, b: Level) => a.level - b.level);
   } catch (error) {
     // If the directory doesn't exist, return an empty array
     if (error instanceof Error && error.message.includes('No file found')) {

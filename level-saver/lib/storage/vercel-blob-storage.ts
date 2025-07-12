@@ -1,4 +1,5 @@
 import { put, del, list } from '@vercel/blob';
+import { Level } from '../../app/types/level';
 import { StorageService } from './types';
 
 export class VercelBlobStorage implements StorageService {
@@ -12,7 +13,7 @@ export class VercelBlobStorage implements StorageService {
     return this.prefix ? `${this.prefix}/${path}` : path;
   }
 
-  async save(data: any, path: string): Promise<string> {
+  async save(data: Level, path: string): Promise<string> {
     const fullPath = this.getFullPath(path);
     const blob = await put(fullPath, JSON.stringify(data, null, 2), {
       access: 'public',
@@ -21,7 +22,7 @@ export class VercelBlobStorage implements StorageService {
     return blob.url;
   }
 
-  async read(path: string): Promise<any> {
+  async read(path: string): Promise<Level> {
     const fullPath = this.getFullPath(path);
     const { blobs } = await list({ prefix: fullPath });
     
@@ -35,6 +36,20 @@ export class VercelBlobStorage implements StorageService {
     }
 
     return response.json();
+  }
+
+  async listFiles(directoryPath: string): Promise<string[]> {
+    const fullPath = this.getFullPath(directoryPath);
+    try {
+      const { blobs } = await list({ prefix: fullPath });
+      return blobs
+        .map(blob => blob.pathname.split('/').pop() || '')
+        .filter(filename => filename.endsWith('.json'));
+    } catch (error) {
+      console.error(`Error listing files in ${directoryPath}:`, error);
+      // If directory doesn't exist, return empty array
+      return [];
+    }
   }
 
   async delete(path: string): Promise<void> {
