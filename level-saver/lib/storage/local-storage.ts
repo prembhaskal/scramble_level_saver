@@ -14,8 +14,13 @@ export class LocalFileSystemStorage implements StorageService {
     return path.join(process.cwd(), this.baseDir, filePath);
   }
 
-  async save(data: Level, filePath: string): Promise<string> {
+  async save(data: Level, filePath: string, allowOverwrite: boolean = false): Promise<string> {
     const fullPath = this.getFullPath(filePath);
+    
+    // Check if file exists and overwrite is not allowed
+    if (!allowOverwrite && await this.exists(filePath)) {
+      throw new Error(`File already exists at ${filePath}. Use allowOverwrite: true to overwrite.`);
+    }
     
     // Ensure the directory exists
     await fs.mkdir(path.dirname(fullPath), { recursive: true });

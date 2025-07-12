@@ -67,7 +67,7 @@ export async function updateLevel(levelId: number, levelData: Level): Promise<Le
   }
 
   const filename = `level_${levelId}.json`;
-  await storage.save(levelData, `${LEVELS_DIR}/${filename}`);
+  await storage.save(levelData, `${LEVELS_DIR}/${filename}`, true); // Allow overwrite for updates
   return levelData;
 }
 

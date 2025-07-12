@@ -13,11 +13,12 @@ export class VercelBlobStorage implements StorageService {
     return this.prefix ? `${this.prefix}/${path}` : path;
   }
 
-  async save(data: Level, path: string): Promise<string> {
+  async save(data: Level, path: string, allowOverwrite: boolean = false): Promise<string> {
     const fullPath = this.getFullPath(path);
     const blob = await put(fullPath, JSON.stringify(data, null, 2), {
       access: 'public',
       addRandomSuffix: false,
+      allowOverwrite: allowOverwrite,
     });
     return blob.url;
   }

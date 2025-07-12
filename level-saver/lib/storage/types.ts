@@ -5,9 +5,10 @@ export interface StorageService {
    * Save data to storage
    * @param data The data to save
    * @param path The path where to save the data
+   * @param allowOverwrite Whether to allow overwriting existing files (default: false)
    * @returns The URL or path where the data was saved
    */
-  save(data: Level, path: string): Promise<string>;
+  save(data: Level, path: string, allowOverwrite?: boolean): Promise<string>;
 
   /**
    * Read data from storage
