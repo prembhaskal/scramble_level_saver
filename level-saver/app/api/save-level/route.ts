@@ -1,15 +1,17 @@
 // app/api/save-level/route.ts
 import { NextResponse } from 'next/server';
 import { saveLevel } from '../../lib/levelStorage';
-import { getServerSession } from 'next-auth';
-import { authOptions } from '@/app/api/auth/[...nextauth]/auth.config';
-import { google } from 'googleapis';
+// Disable automatic save to drive.
+// import { getServerSession } from 'next-auth';
+// import { authOptions } from '@/app/api/auth/[...nextauth]/auth.config';
+// import { google } from 'googleapis';
 
 export async function POST(request: Request) {
   try {
     const body = await request.json();
     const savedLevel = await saveLevel(body);
 
+    /* Disable automatic save to drive.
     // Check if user is authenticated
     const session = await getServerSession(authOptions);
     
@@ -22,17 +24,17 @@ export async function POST(request: Request) {
             Authorization: `Bearer ${session.accessToken}`,
           },
         });
-
+        
         const fileMetadata = {
           name: `level-${Date.now()}.json`,
           mimeType: 'application/json',
         };
-
+        
         const media = {
           mimeType: 'application/json',
           body: JSON.stringify(savedLevel),
         };
-
+        
         await drive.files.create({
           requestBody: fileMetadata,
           media: media,
@@ -43,6 +45,7 @@ export async function POST(request: Request) {
         // Don't fail the whole request if Google Drive save fails
       }
     }
+    */
 
     return NextResponse.json(savedLevel);
   } catch (error) {
