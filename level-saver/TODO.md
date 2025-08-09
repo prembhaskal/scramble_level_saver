@@ -5,8 +5,10 @@
     - Added option to save in google drive. [DONE]
     - Add blob storage to save levels. [DONE]
     - change google drive save option, let primary option be blob storage.
-      provide export to google drive option which will export all levels to google drive. saving each level to drive is painful.
-    - fix a file structure in drive 
+      remove drive save as primary option.
+      provide export to google drive option which will export all levels to google drive. saving each level to drive is painful
+        provide more options of naming the file and selecting directory.
+    - verify the site is working on mobile, make it responsive if needed.
     - update options to read, add, update and delete
     - remove file save feature as it doesn't work on webserver like vercel.
     - move sign-in to google to home page. validate before going to next step
