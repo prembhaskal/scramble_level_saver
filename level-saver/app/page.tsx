@@ -38,11 +38,13 @@ export default function Home() {
   const [levels, setLevels] = useState<Level[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
 
   useEffect(() => {
-    fetchLevels();
-  }, []);
+    if (session) {
+      fetchLevels();
+    }
+  }, [session]);
 
   const fetchLevels = async () => {
     try {
@@ -83,10 +85,37 @@ export default function Home() {
     }
   };
 
-  if (isLoading) {
+  // Show loading while authentication status is being determined
+  if (status === 'loading') {
     return (
       <div className="container mx-auto p-4 flex justify-center items-center min-h-screen">
         <div className="text-gray-500">Loading...</div>
+      </div>
+    );
+  }
+
+  // If not authenticated, show sign-in page
+  if (!session) {
+    return (
+      <div className="container mx-auto p-4 flex justify-center items-center min-h-screen">
+        <div className="text-center">
+          <h1 className="text-3xl font-bold mb-4">Scramble Level Saver</h1>
+          <p className="text-gray-600 mb-6">Please sign in to access the application</p>
+          <button
+            onClick={() => signIn('google')}
+            className="bg-blue-500 text-white px-6 py-3 rounded hover:bg-blue-600"
+          >
+            Sign In
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  if (isLoading) {
+    return (
+      <div className="container mx-auto p-4 flex justify-center items-center min-h-screen">
+        <div className="text-gray-500">Loading levels...</div>
       </div>
     );
   }
@@ -102,26 +131,17 @@ export default function Home() {
           >
             Create New Level
           </Link>
-          {session ? (
-            <div className="flex items-center gap-2">
-              <span className="text-sm text-gray-600">
-                {session.user?.email}
-              </span>
-              <button
-                onClick={() => signOut()}
-                className="text-sm text-gray-600 hover:text-gray-800"
-              >
-                Sign Out
-              </button>
-            </div>
-          ) : (
+          <div className="flex items-center gap-2">
+            <span className="text-sm text-gray-600">
+              {session.user?.email}
+            </span>
             <button
-              onClick={() => signIn('google')}
+              onClick={() => signOut()}
               className="text-sm text-gray-600 hover:text-gray-800"
             >
-              Sign in with Google (for Drive backup)
+              Sign Out
             </button>
-          )}
+          </div>
         </div>
       </div>
 
