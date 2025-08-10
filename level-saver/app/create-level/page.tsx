@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { useSession, signIn } from 'next-auth/react';
+import { useSession } from 'next-auth/react';
 import SpellathonSection from '../components/spellathonsection';
 import ScrambleSection from '../components/scramblesection';
 import { FormData } from '../page';
@@ -10,7 +10,7 @@ import AnswersSection from '../components/answerssection';
 
 export default function CreateLevel() {
   const router = useRouter();
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const [currentLevel, setCurrentLevel] = useState(1);
   const [formData, setFormData] = useState<FormData>({
     spellathon: {
@@ -29,8 +29,16 @@ export default function CreateLevel() {
   });
 
   useEffect(() => {
-    fetchLastLevel();
-  }, []);
+    // Redirect to home if not authenticated
+    if (status === 'unauthenticated') {
+      router.push('/');
+      return;
+    }
+    
+    if (session) {
+      fetchLastLevel();
+    }
+  }, [session, status, router]);
 
   const fetchLastLevel = async () => {
     try {
@@ -43,20 +51,6 @@ export default function CreateLevel() {
   };
 
   const handleSubmit = async () => {
-    if (!session) {
-      // If not authenticated, prompt to sign in
-      const result = await signIn('google', { 
-        callbackUrl: window.location.href,
-        redirect: false 
-      });
-      
-      if (result?.error) {
-        alert('Please sign in to save levels');
-        return;
-      }
-      return;
-    }
-
     try {
       const response = await fetch('/api/save-level', {
         method: 'POST',
@@ -83,6 +77,20 @@ export default function CreateLevel() {
       alert('Failed to save level');
     }
   };
+
+  // Show loading while authentication status is being determined
+  if (status === 'loading') {
+    return (
+      <div className="container mx-auto p-4 flex justify-center items-center min-h-screen">
+        <div className="text-gray-500">Loading...</div>
+      </div>
+    );
+  }
+
+  // Don't render anything if not authenticated (will redirect)
+  if (!session) {
+    return null;
+  }
 
   return (
     <div className="container mx-auto p-4">
@@ -112,7 +120,7 @@ export default function CreateLevel() {
         onClick={handleSubmit}
         className="bg-green-500 text-white px-4 py-2 rounded mt-4"
       >
-        {session ? 'Save Level' : 'Sign in to Save Level'}
+        Save Level
       </button>
     </div>
   );

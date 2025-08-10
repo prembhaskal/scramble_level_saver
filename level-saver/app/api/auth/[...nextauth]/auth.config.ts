@@ -17,6 +17,13 @@ export const authOptions = {
     }),
   ],
   callbacks: {
+    async signIn({ account, profile }: any) {
+      // Only allow pbhaskal@gmail.com to sign in
+      if (account.provider === "google") {
+        return profile.email === "pbhaskal@gmail.com";
+      }
+      return false;
+    },
     async jwt({ token, account }: any) {
       if (account) {
         token.accessToken = account.access_token;
