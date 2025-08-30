@@ -1,6 +1,6 @@
 import fs from 'fs/promises';
 import path from 'path';
-import {Level} from '../types/level';
+import {Level, LoopTheLoop} from '../types/level';
 
 const LEVELS_DIR = path.join(process.cwd(), 'data', 'levels');
 
@@ -61,6 +61,34 @@ function validateLevel(level: Level) {
   if (!level.scramble?.words || level.scramble.words.length !== 4) return false;
   if (!level.scramble?.circledLetters || level.scramble.circledLetters.length !== 4) return false;
   if (level.scramble.sentence && level.scramble.sentence.length > 150) return false;
+  
+  // Validate LoopTheLoop if present
+  if (level.loopTheLoop && !validateLoopTheLoop(level.loopTheLoop)) return false;
+  
+  return true;
+}
+
+function validateLoopTheLoop(loopTheLoop: LoopTheLoop): boolean {
+  // Missing loopTheLoop is completely fine
+  if (!loopTheLoop) return true;
+  
+  // Missing grid is also fine
+  if (!loopTheLoop.grid) return true;
+  
+  // If grid exists, it must be valid
+  if (!Array.isArray(loopTheLoop.grid)) return false;
+  if (loopTheLoop.grid.length !== 7) return false;
+  
+  // Check each row
+  for (const row of loopTheLoop.grid) {
+    if (!Array.isArray(row) || row.length !== 7) return false;
+    
+    // Check each cell value
+    for (const cell of row) {
+      if (typeof cell !== 'string') return false;
+      if (!['', '0', '1', '2', '3'].includes(cell)) return false;
+    }
+  }
   
   return true;
 }

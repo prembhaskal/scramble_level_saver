@@ -5,8 +5,9 @@ import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import SpellathonSection from '../components/spellathonsection';
 import ScrambleSection from '../components/scramblesection';
-import { FormData } from '../page';
 import AnswersSection from '../components/answerssection';
+import LoopTheLoopSection from '../components/looptheloopsection';
+import { FormData } from '../types/level';
 
 export default function CreateLevel() {
   const router = useRouter();
@@ -25,6 +26,9 @@ export default function CreateLevel() {
     },
     answers: {
       ans: '',
+    },
+    loopTheLoop: {
+      grid: Array(7).fill(null).map(() => Array(7).fill('')),
     },
   });
 
@@ -106,6 +110,13 @@ export default function CreateLevel() {
         data={formData.scramble}
         onChange={(scrambleData) =>
           setFormData({ ...formData, scramble: scrambleData })
+        }
+      />
+
+      <LoopTheLoopSection
+        data={formData.loopTheLoop}
+        onChange={(loopTheLoopData) =>
+          setFormData({ ...formData, loopTheLoop: loopTheLoopData })
         }
       />
 

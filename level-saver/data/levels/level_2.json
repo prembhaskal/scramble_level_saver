@@ -38,5 +38,72 @@
   },
   "answers": {
     "ans": "SCRAMBLE:\nwords: Arena, idiot, length, reship\nAnswer: relationship\n\nSPELLATHON:\nache, acre, arch, care, cart, cater, char,\nchart, chat, CHATTER, cheat, crate,\neach, etch, race, RATCHET, reach,\nreact, retch, tact, teach, trace, tract"
+  },
+  "loopTheLoop": {
+    "grid": [
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    ]
   }
 }

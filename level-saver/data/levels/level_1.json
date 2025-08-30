@@ -37,6 +37,73 @@
     "sentence": "Happiness is good <BLANK > and a bad <BLANK> - Ingrid Bergman (6,6)"
   },
   "answers": {
-    "ans": "dsdsdsdsd"
+    "ans": "vitally, tally, ally, lily\n\neagle, troth, slummy, rhythm, \nhappiness is good health and a bad memory - ingrid bergman"
+  },
+  "loopTheLoop": {
+    "grid": [
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "3",
+        "",
+        "",
+        "",
+        "",
+        "2",
+        "3"
+      ],
+      [
+        "3",
+        "0",
+        "2",
+        "2",
+        "2",
+        "",
+        ""
+      ],
+      [
+        "3",
+        "2",
+        "2",
+        "3",
+        "2",
+        "",
+        "3"
+      ],
+      [
+        "2",
+        "2",
+        "",
+        "",
+        "2",
+        "",
+        ""
+      ],
+      [
+        "2",
+        "",
+        "2",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    ]
   }
 }

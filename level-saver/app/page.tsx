@@ -4,35 +4,7 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useSession, signIn, signOut } from 'next-auth/react';
-
-export interface Spellathon {
-  sixLetters: string;
-  centerLetter: string;
-  description: string;
-}
-
-export interface Scramble {
-  words: string[];
-  circledLetters: number[][];
-  sentence: string;
-}
-
-export interface Answers {
-  ans: string;
-}
-
-export interface Level {
-  level: number;
-  spellathon: Spellathon;
-  scramble: Scramble;
-  answers: string;
-}
-
-export interface FormData {
-  spellathon: Spellathon;
-  scramble: Scramble;
-  answers: Answers;
-}
+import { Level } from './types/level';
 
 export default function Home() {
   const [levels, setLevels] = useState<Level[]>([]);

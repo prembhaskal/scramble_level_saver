@@ -5,7 +5,8 @@ import { useRouter } from 'next/navigation';
 import SpellathonSection from '../../components/spellathonsection';
 import ScrambleSection from '../../components/scramblesection';
 import AnswersSection from '../../components/answerssection';
-import {FormData} from '../../page';
+import LoopTheLoopSection from '../../components/looptheloopsection';
+import { FormData } from '../../types/level';
 
 interface Props {
   params: Promise<{
@@ -31,7 +32,10 @@ export default function EditLevel(props: Props) {
     },
     answers: {
       ans: '',
-    }
+    },
+    loopTheLoop: {
+      grid: Array(7).fill(null).map(() => Array(7).fill('')),
+    },
   });
 
   useEffect(() => {
@@ -46,6 +50,10 @@ export default function EditLevel(props: Props) {
         throw new Error('Failed to fetch level');
       }
       const data = await response.json();
+      // Ensure loopTheLoop has a default grid if missing
+      if (!data.loopTheLoop) {
+        data.loopTheLoop = { grid: Array(7).fill(null).map(() => Array(7).fill('')) };
+      }
       setFormData(data);
     } catch (error) {
       console.error('Error fetching level:', error);
@@ -112,6 +120,13 @@ export default function EditLevel(props: Props) {
         data={formData.scramble}
         onChange={(scrambleData) =>
           setFormData({ ...formData, scramble: scrambleData })
+        }
+      />
+
+      <LoopTheLoopSection
+        data={formData.loopTheLoop}
+        onChange={(loopTheLoopData) =>
+          setFormData({ ...formData, loopTheLoop: loopTheLoopData })
         }
       />
 
